@@ -1,0 +1,1 @@
+*/3 * * * * cd $GOPATH/src/mailer-go && go build mailer.go && go run mailer.go >> /root/mailerservicelogs/logs.txt
