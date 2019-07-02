@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=dbname
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_HOST=127.0.0.1
+    ports:
+      - "5432:5432"
+    volumes:
+      - $HOME/docker_volumes/postgres/data:/var/lib/postgresql/data
+
+  mailer:
+    build: 
+      context: mailservice/
+      dockerfile: Dockerfile.mailer
+    container_name: mailer
+    restart: on-failure
+    volumes:
+      - $HOME/docker_volumes/mailerservice:/root/mailerservicelogs
+    depends_on:
+      - db
+   
